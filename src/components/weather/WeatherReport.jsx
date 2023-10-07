@@ -21,8 +21,9 @@ export default function WeatherReport() {
     useEffect(() => {
         setIsLoading(false)
     }, [])
+    
     //if the server is loading or state is loading || weather the data is loading. || not Found
-    if (isLoading || !weatherData.main?.temp) return <WeatherLoadingSkelton />
+    if (isLoading || !weatherData?.main?.temp) return <WeatherLoadingSkelton />
 
     /** refresh the data 
      * 

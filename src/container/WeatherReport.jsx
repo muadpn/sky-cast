@@ -1,7 +1,5 @@
 "use client";
-import { THEME_COLOR } from "@/components/buttons/ToggleThemeButton";
 import WeatherLoadingSkelton from "@/components/weather/WeatherLoadingSkelton";
-import { useTheme } from "next-themes";
 import React, { useContext, useEffect, useState } from "react";
 import WeatherIcon from "@/components/weather/Icons";
 import { WeatherContext } from "@/context/WeatherDataProvider";
@@ -10,12 +8,6 @@ import { IoMdRefresh } from 'react-icons/io'
 
 export default function WeatherReport() {
   const { weatherData, RetriveWeatherData } = useContext(WeatherContext);
-  // let { weather, main, wind, System } = weatherData;
-  // let { weather, main, wind, System }
-
-  const { theme } = useTheme();
-
-  // }
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(false)
