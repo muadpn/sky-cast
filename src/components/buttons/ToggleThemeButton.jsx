@@ -4,24 +4,30 @@ import Image from "next/image";
 import DarkMoon from "@/assets/image/dark-moon.png";
 import LightMoon from "@/assets/image/light-moon.png";
 import { AnimatePresence, motion } from "framer-motion";
-
 import { useTheme } from "next-themes";
+// DEFAULT THEME_COLOR
 export const THEME_COLOR = {
   DARK: "dark",
   LIGHT: "light",
   SYSTEM: "system",
 };
+
 const ToggleThemeButton = () => {
   const { theme, setTheme } = useTheme();
   const [client, setClient] = useState(false);
+
+  //handle Toggle States
   const handleThemeChange = () => {
     if (theme === THEME_COLOR.DARK) setTheme(THEME_COLOR.LIGHT);
     if (theme === THEME_COLOR.LIGHT) setTheme(THEME_COLOR.DARK);
     if (theme === THEME_COLOR.SYSTEM) setTheme(THEME_COLOR.DARK);
   };
+
+  //to avoid hydration issue
   useEffect(() => {
     setClient(true);
   }, []);
+
   return (
     <AnimatePresence mode="popLayout">
       <motion.div

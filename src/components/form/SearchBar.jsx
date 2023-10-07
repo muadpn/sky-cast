@@ -2,101 +2,17 @@
 import { WeatherContext } from "@/context/WeatherDataProvider";
 import { useDebounce } from "@/utils/debouncer";
 import axios from "axios";
-import { AnimatePresence, motion } from "framer-motion";
-
-import { useRouter, useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { TbWorldSearch } from "react-icons/tb";
 import { toast } from "sonner";
-// import useSWR from "swr";
 
-let demoData = [
-  {
-    name: "Kochi",
-    local_names: {
-      he: "קוצ'י",
-      ta: "கொச்சி",
-      cs: "Kóčin",
-      el: "Κοτσί",
-      pa: "ਕੋਚੀ",
-      ks: "کوچی",
-      ur: "کوچی",
-      kn: "ಕೊಚ್ಚಿ",
-      es: "Cochín",
-      en: "Kochi",
-      uk: "Кочі",
-      hi: "कोच्चि",
-      ja: "コーチ",
-      te: "కొచ్చి",
-      zh: "科钦",
-      ps: "کوچين",
-      ar: "كوتشي",
-      ml: "കൊച്ചി",
-      fa: "کوچی",
-      ru: "Коччи",
-      sr: "Кочин",
-    },
-    lat: 9.931308,
-    lon: 76.2674136,
-    country: "IN",
-    state: "Kerala",
-  },
-  {
-    name: "Kochi",
-    local_names: {
-      feature_name: "Kōchi",
-      ar: "كوتشي",
-      mr: "कोची",
-      ru: "Коти",
-      uk: "Коті",
-      es: "Kōchi",
-      lt: "Kočis",
-      de: "Kōchi",
-      fr: "Kōchi",
-      th: "โคจิ",
-      en: "Kochi",
-      sr: "Кочи",
-      ko: "고치시",
-      ascii: "Kōchi",
-      cs: "Kóči",
-      zh: "高知市",
-      pl: "Kōchi",
-      et: "Kōchi",
-      az: "Koçi",
-      sv: "Kochi",
-      ml: "കൊച്ചി",
-      ja: "高知市",
-      eo: "Koĉo",
-    },
-    lat: 33.5680384,
-    lon: 133.5394221,
-    country: "JP",
-  },
-  {
-    name: "Kochi",
-    lat: 20.0287732,
-    lon: 79.1231918,
-    country: "IN",
-    state: "Maharashtra",
-  },
-  {
-    name: "Kochi",
-    lat: 20.1870746,
-    lon: 78.4556436,
-    country: "IN",
-    state: "Maharashtra",
-  },
-  {
-    name: "Kochi",
-    lat: 20.2938984,
-    lon: 78.7724662,
-    country: "IN",
-    state: "Maharashtra",
-  },
-];
 
 const SearchBar = () => {
+  //function to Fetch Weather data from Weather Context
   const { RetriveWeatherData } = useContext(WeatherContext);
+
+  //animation config. tag: animationConfig
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -111,45 +27,68 @@ const SearchBar = () => {
     hidden: { opacity: 0 },
     show: { opacity: 1 },
   };
+  //animation config animationConfig.
+
+  // UseStates Tag : UseState
   const [InputSearchCity, setInputSearchCity] = useState({
     city: "",
   });
   const [receivedCity, setReceivedCity] = useState([]);
   const [ShowSearched, setShowSearched] = useState(false);
   const [SearchLoading, setSearchLoading] = useState(false);
+  //UseStates Tag : UseState
+
+  //deBounce the result by 600ms low level implimentation
   const CityDebounced = useDebounce(InputSearchCity.city);
 
+
+  //useEffect starts tag: useEffectSearchCity
+  // depend upon CityDebounced
   useEffect(() => {
     async function getCities() {
-      console.log('first')
-      setSearchLoading(true);
       try {
+        //
+        /** get data from api destructured data and status. 
+         * 
+         * @async
+         * @returns - {status, data }
+         * @param searchinputs
+         */
         const { status, data } = await axios.post("/api/city", {
           search: CityDebounced,
         });
-        if (status === 200) {
 
-          setReceivedCity(data.Cities);
-          setTimeout(() => {
+        //Found-
+        if (status === 200) {
+          // Confirming weather data exists
+          if (!data.Cities.length) {
             setSearchLoading(false);
-          }, [250]);
+            return toast('Oops! City or country not found. Try again!')
+          }
+          //Save the data to view on ReceivedState for User Search B
+          setShowSearched(true);
+          setReceivedCity(data.Cities);
         }
+        setSearchLoading(false);
       } catch (error) {
-        console.log()
-        if (error?.response?.message) {
-          return toast(error?.response?.message);
+        setSearchLoading(false);
+        if (error?.response?.data?.message) {
+          return toast(error?.response?.data?.message);
         } else {
           return toast('Something Went Wrong')
         }
       }
     }
-    if (CityDebounced && CityDebounced.length >= 2) {
 
-      setShowSearched(true);
-      toast.loading("Loading...", { duration: 1200 });
+    //if debouced city is present and also greater than 2 
+    if (CityDebounced && CityDebounced.length >= 2) {
+      setSearchLoading(true);
       getCities();
     }
   }, [CityDebounced]);
+  //useEffectSearchCity
+
+  //Handle input Change.
   const handleCityChange = (e) => {
     setInputSearchCity((prev) => {
       return {
@@ -158,6 +97,14 @@ const SearchBar = () => {
       };
     });
   };
+
+
+  /** set the handle SetData Takes up params
+   * 
+   * @param {lat, lon} location 
+   * @returns void
+   * 
+   */
   const HandleSetData = (location) => {
     RetriveWeatherData(location);
     setShowSearched(false);

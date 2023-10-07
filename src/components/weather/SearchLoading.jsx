@@ -1,5 +1,4 @@
-import React from 'react'
-
+//search Loader
 const SearchLoading = () => {
     return (
         <article className="relative">

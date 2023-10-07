@@ -1,103 +1,49 @@
-// import {
-//     // FaSun,
-//     FaCloudSunRain,
-//     FaCloudMoonRain,
-//     FaCloudBolt,
-//     FaSun,
-// } from 'react-icons/fa'
+
 import {
     BsFillCloudSunFill,
     BsFillCloudMoonFill,
     BsCloudsFill,
     BsFillCloudRainHeavyFill
 } from 'react-icons/bs'
+import { FaCloudMoonRain, FaCloudSunRain, FaSun } from 'react-icons/fa'
 import {
     IoCloudSharp
-} from 'react-icons/io'
+} from 'react-icons/io5'
 
 import {
     TbSnowflake,
-
 } from 'react-icons/tb'
 import { RiMistFill } from 'react-icons/ri'
 import { GiMoon } from 'react-icons/gi'
+import { FaCloudBolt } from 'react-icons/fa6'
 
-// export default IconData = {
-//     "01d": (size) => <FaSun size={size} />,
-//     "01n": (size) => <GiMoon size={size} />,
-//     "02d": (size) => <BsFillCloudSunFill size={size} />,
-//     "03d": (size) => <IoCloudSharp size={size} />,
-//     "03n": (size) => <IoCloudSharp size={size} />,
-//     "04d": (size) => <BsCloudsFill size={size} />,
-//     "04n": (size) => <BsCloudsFill size={size} />,
-//     "09d": (size) => <BsFillCloudRainHeavyFill size={size} />,
-//     "09n": (size) => <BsFillCloudRainHeavyFill size={size} />,
-//     "10d": (size) => <FaCloudSunRain size={size} />,
-//     "10n": (size) => <FaCloudMoonRain size={size} />,
-//     "11d": (size) => <FaCloudBolt size={size} />,
-//     "11n": (size) => <FaCloudBolt size={size} />,
-//     "13d": (size) => <TbSnowflake size={size} />,
-//     "13n": (size) => <TbSnowflake size={size} />,
-//     "50d": (size) => <RiMistFill size={size} />,
-//     "50n": (size) => <RiMistFill size={size} />,
-// }
-
-export default function WeatherIcon({ code, size }) {
-    let IconComponent = null;
-    switch (code) {
-        case "01d":
-            IconComponent = FaSun;
-            break;
-        case "01n":
-            IconComponent = GiMoon;
-            break;
-        case "02d":
-            IconComponent = BsFillCloudSunFill;
-            break;
-        case "02n":
-            IconComponent = BsFillCloudMoonFill;
-            break;
-        case "03d":
-            IconComponent = IoCloudSharp;
-            break;
-        case "03n":
-            IconComponent = IoCloudSharp;
-            break;
-        case "04d":
-        case "04n":
-            IconComponent = BsCloudsFill;
-            break;
-        case "09d":
-        case "09n":
-            IconComponent = BsFillCloudRainHeavyFill;
-            break;
-        case "10d":
-            IconComponent = FaCloudSunRain;
-            break;
-        case "10n":
-            IconComponent = FaCloudMoonRain;
-            break;
-        case "11d":
-        case "11n":
-            IconComponent = FaCloudBolt;
-            break;
-        case "13d":
-        case "13n":
-            IconComponent = TbSnowflake;
-            break;
-        case "50d":
-        case "50n":
-            IconComponent = RiMistFill;
-            break;
-        default:
-            IconComponent = IoCloudSharp;
-            break;
-    }
-
-    return (
-        <div>
-            {IconComponent && <IconComponent size={size} />}
-        </div>
-    );
+const iconMap = {
+    A01d: (size) => { return (<FaSun size={size} />) },
+    A01n: (size) => { return (<GiMoon size={size} />) },
+    A02d: (size) => { return (<BsFillCloudSunFill size={size} />) },
+    A02n: (size) => { return (<BsFillCloudMoonFill size={size} />) },
+    A03d: (size) => { return (<IoCloudSharp size={size} />) },
+    A03n: (size) => { return (<IoCloudSharp size={size} />) },
+    A04d: (size) => { return (<BsCloudsFill size={size} />) },
+    A04n: (size) => { return (<BsCloudsFill size={size} />) },
+    A09d: (size) => { return (<BsFillCloudRainHeavyFill size={size} />) },
+    A09n: (size) => { return (<BsFillCloudRainHeavyFill size={size} />) },
+    A10d: (size) => { return (<FaCloudSunRain size={size} />) },
+    A10n: (size) => { return (<FaCloudMoonRain size={size} />) },
+    A11d: (size) => { return (<FaCloudBolt size={size} />) },
+    A11n: (size) => { return (<FaCloudBolt size={size} />) },
+    A13d: (size) => { return (<TbSnowflake size={size} />) },
+    A13n: (size) => { return (<TbSnowflake size={size} />) },
+    A50d: (size) => { return (<RiMistFill size={size} />) },
+    A50n: (size) => { return (<RiMistFill size={size} />) },
 };
 
+// reloads the icons and render based on the code. Should Pass-in |A| before the Icon to Avoid Octal String Interceptions.
+export default function WeatherIcon({ code, size }) {
+    const IconComponent = iconMap[code]
+    return (
+        <div>
+            {IconComponent(size)}
+        </div>
+    );
+}

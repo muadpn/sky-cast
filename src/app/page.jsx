@@ -1,8 +1,6 @@
 import SearchBar from "@/components/form/SearchBar";
 import HeroTitle from "@/components/hero/HeroTitle";
 import EncorageToSearch from "@/components/weather/EncorageToSearch";
-import SearchLoading from "@/components/weather/SearchLoading";
-
 import WeatherWidget from "@/components/weather/WeatherWidget";
 import WeatherCartContainer from "@/container/WeatherCartContainer";
 import { Suspense } from "react";
@@ -33,8 +31,6 @@ export default function Home() {
         <section>
           <WeatherCartContainer />
         </section>
-
-
       </main>
     </>
   );

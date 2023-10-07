@@ -6,7 +6,7 @@ export function useDebounce(value, delay = 600) {
   const [deboucedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
-    console.log('first')
+   
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);

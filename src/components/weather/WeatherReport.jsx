@@ -1,29 +1,34 @@
 "use client";
-import { THEME_COLOR } from "@/components/buttons/ToggleThemeButton";
 import WeatherLoadingSkelton from "@/components/weather/WeatherLoadingSkelton";
-import { useTheme } from "next-themes";
 import React, { useContext, useEffect, useState } from "react";
 import WeatherIcon from "@/components/weather/Icons";
 import { WeatherContext } from "@/context/WeatherDataProvider";
-import { convert12HourTime } from "@/utils/ProcessWeatherData";
 import { IoMdRefresh } from 'react-icons/io'
-import SearchLoading from "./SearchLoading";
+import { convert12HourTime } from "@/utils/Converts";
+
+// mtr / 1000 = KM
+export const CONVERT_MTR_TO_KM_VALUE = 1000
+
 
 export default function WeatherReport() {
+    //get weatherdata from context
     const { weatherData, RetriveWeatherData } = useContext(WeatherContext);
-    // let { weather, main, wind, System } = weatherData;
-    // let { weather, main, wind, System }
+
+    //checks if the page is loading || if it is in loading state
     const [isLoading, setIsLoading] = useState(true);
+
+    //Loading to false if the page is loaded.
     useEffect(() => {
         setIsLoading(false)
     }, [])
-    const SPEEDCONVERTER = 3.6
+    //if the server is loading or state is loading || weather the data is loading. || not Found
+    if (isLoading || !weatherData.main?.temp) return <WeatherLoadingSkelton />
 
-    // if (isLoading) return <WeatherLoadingSkelton isLoaded={weatherData?.main ? false : true} />
-    if (isLoading || !weatherData.main?.temp) return <WeatherLoadingSkelton/>
-
-
-    // if (!weatherData?.main?.temp) return null
+    /** refresh the data 
+     * 
+     * @param {lat , lon } coord 
+     * @returns {true} completed
+     */
     const handleRefresh = async (coord) => {
         setIsLoading(true)
         const { completed } = await RetriveWeatherData(coord);
@@ -34,16 +39,17 @@ export default function WeatherReport() {
     return (
         <article className="">
             <div className="flex justify-center md:justify-start ">
-                <div className={`min-w-[90%] dark:bg-black/60 relative hover:dark:bg-black/30 transition-colors px-6 sm:px-10 md:px-6 drop-shadow-2xl shadow-slate-300  filter-none lg:px-10 py-10 rounded-3xl sm:min-w-[60%] md:min-w-[80%] lg:min-w-[70%]`}>
+                <div className={`min-w-[90%] bg-gray-400/20 hover:bg-gray-400/40 dark:bg-black/60 relative hover:dark:bg-black/30 transition-colors px-6 sm:px-10 md:px-6 drop-shadow-2xl shadow-slate-300  filter-none lg:px-10 py-10 rounded-3xl sm:min-w-[60%] md:min-w-[80%] lg:min-w-[70%]`}>
                     <div className="absolute top-2 right-5" onClick={() => handleRefresh(weatherData?.coord)}><IoMdRefresh size={24} /></div>
                     <div className="flex justify-between border-b-[2px] border-gray-400 py-2 px-4">
                         <h4 className=" ">Weather At</h4>
+                        {/* converts Unix Time to 12HourTime */}
                         <p>{convert12HourTime(weatherData?.dateTime)}</p>
                     </div>
                     <div className="flex justify-between p-4 border-b-[1px] border-gray-700">
                         <div>
                             <div className="flex items-center gap-1">
-                                {weatherData && <WeatherIcon code={weatherData?.weather[0]?.icon} size={24} />}
+                                {weatherData && <WeatherIcon code={`A${weatherData?.weather[0]?.icon}`} size={24} />}
                                 <p className="font-light text-xl ">
                                     {Math.floor(weatherData?.main?.temp)}°
                                 </p>
@@ -67,7 +73,7 @@ export default function WeatherReport() {
                     <div className="p-4 border-b-[1px] border-gray-700">
                         <div className="flex justify-between">
                             <p>Wind Gusts</p>
-                            <p>{Math.floor(weatherData?.wind?.speed * SPEEDCONVERTER)} km/h</p>
+                            <p>{Math.floor(weatherData?.wind?.speed * CONVERT_MTR_TO_KM_VALUE)} km/h</p>
                         </div>
                         <div className="flex justify-between">
                             <p>Wind direction</p>
@@ -77,7 +83,7 @@ export default function WeatherReport() {
                     <div className="p-4 border-b-[1px] border-gray-700">
                         <div className="flex justify-between">
                             <p>Visibility</p>
-                            <p>10 km</p>
+                            <p>{weatherData.visibility / CONVERT_MTR_TO_KM_VALUE}/km</p>
                         </div>
                     </div>
                 </div>

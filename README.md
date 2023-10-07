@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# SkyCast
 
-First, run the development server:
+Project Name: SkyCast - Weather Forecast & More
+
+Discover the world through weather with SkyCast! Dive into a meteorological adventure that goes beyond just temperatures. Our sleek and intuitive web application offers a dynamic weather experience that's more than just a forecast.
+
+🌦️ All-in-One Weather Data: SkyCast provides you with a comprehensive weather overview. From current temperature to date and time, location specifics, humidity, wind direction, pressure, and more, we've got your weather needs covered.
+
+🌐 City Search: Simply search for your favorite cities to access real-time weather information instantly. Whether you're planning a trip or just curious about a location, SkyCast delivers the data you need.
+
+🔄 Data Persistence: Worried about constantly refreshing for updates? Don't be! SkyCast automatically refreshes weather data every 30 minutes, ensuring you're always in the know.
+
+🌗 Light & Dark Modes: Customize your experience with our stylish light and dark modes. Whether it's a bright day or a cozy night, SkyCast adapts to your preferences.
+
+🌡️ Temperature Conversion: Switch between Fahrenheit and Celsius effortlessly to understand the weather on your terms.
+
+Powered by Cutting-Edge Technologies: SkyCast is built using a tech stack that includes Axios for seamless data fetching, Framer Motion for delightful animations, Next.js for server-rendered speed, React for a robust UI, Tailwind CSS for modern styling, Sonner for toast notifications, and React Icons for stunning visuals.
+
+Embrace the elements with SkyCast and make weather-watching an experience you'll look forward to. Explore the world, one forecast at a time! ⛅
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`OPEN_WEATHER_API_SECRET` 
+you can get `OPEN_WEATHER_API_SECRET` from the mentioned url
+https://home.openweathermap.org/api_keys
+
+`OPEN_WEATHER_API_URL_DATA` = "https://api.openweathermap.org/data/2.5"
+
+`OPEN_WEATHER_API_URL_GEO_DATA` = "http://api.openweathermap.org/geo/1.0/"
+
+
+
+## Installation
+Clone the repository using 
 
 ```bash
+git clone https://github.com/muadpn/sky-cast.git
+
+cd sky-cast
+
+npm install
+
+```
+After configuring `.env` in your root folder which is `./sky-cast`
+
+to run in developer mode type below command in your terminal on root folder `./sky-cast`
+```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+to run in Build mode Run 
+```bash
+npm run Build
+
+<Long loading...>
+
+npm start
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Demo
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+[`Click Here to View The Demo`](https://skycast-app.vercel.app/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

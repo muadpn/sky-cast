@@ -44,8 +44,6 @@ export default function WeatherDataProvider({ children }) {
   );
   const [weatherData, setWeatherData] = useState({});
   function ToggleTemperature() {
-    console.log(temperature);
-    console.log(weatherData.main.temp)
     if (temperature === TEMPERATURE.CELSIUS) {
       const proccesedData = ProccessWeatherData(
         weatherData,
@@ -92,7 +90,7 @@ export default function WeatherDataProvider({ children }) {
         method: "GET",
         next: {
           tags: [JSON.stringify(location.lat, location.lon)],
-          revalidate: 3600,
+          revalidate: 1800,
         },
       }
     );

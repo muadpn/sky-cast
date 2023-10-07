@@ -1,6 +1,12 @@
 import { IoMdRefresh } from 'react-icons/io'
-const WeatherLoadingSkelton = ({ isLoaded }) => {
 
+/** Loading Skelton
+ * NOTE: SHOULD PASS IF ITS CALLING FROM SERVER COMPONENTS! To Avoid Hydration.
+ * 
+ * @param isloaded
+ * @returns null | jsx elements
+ */
+const WeatherLoadingSkelton = ({ isLoaded }) => {
     return (
         <article className="">
             {!isLoaded ? (
@@ -49,7 +55,7 @@ const WeatherLoadingSkelton = ({ isLoaded }) => {
                             </div>
                             <div className="p-4 border-b-[1px] border-gray-700 ">
                                 <div className="flex justify-between py-2 bg-slate-700/40 rounded-lg min-w-[100px] min-h-[40px] animate-pulse">
-                                    
+
                                 </div>
                             </div>
                         </div>

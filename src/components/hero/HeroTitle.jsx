@@ -1,20 +1,19 @@
 "use client";
 import React, { useEffect } from "react";
 import Typed from "typed.js";
-
 const HeroTitle = () => {
+  // Get whats on the Span Component
   const el = React.useRef(null);
+
+  // Render the Array and retrive whats rendered and whats not.
   const typed = React.useRef(null);
   useEffect(() => {
-
     const options = {
       strings: [
         "Forecast Hub",
-        "Info Center",
-        "Forecast Hub",
-        "Info Center",
-        "Forecast Hub",
-        "Info Center",
+        "Info Hub",
+        "Insight  Hub",
+
       ],
       typeSpeed: 50,
       backSpeed: 50,

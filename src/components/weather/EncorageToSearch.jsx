@@ -1,5 +1,4 @@
-import React from 'react'
-
+// Whats Comes on Loading | While Searching.
 const EncorageToSearch = () => {
     return (
         <article>
