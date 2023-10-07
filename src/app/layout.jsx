@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-100/75 dark:bg-black/50 `}>
+      <body className={`${inter.className} bg-gray-100 dark:bg-black/80 `}>
         <WeatherDataProvider>
           <ThemeProvider
             attribute="class"
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             <Toaster richColors />
-            <div className="px-2 md:px-6 lg:px-10 max-w-screen-2xl m-auto transition-colors duration-1000  ">
+            <div className="px-1 xs:px-2 md:px-6 lg:px-10 max-w-screen-2xl m-auto transition-colors duration-1000  ">
               <NavBar />
               {children}
             </div>

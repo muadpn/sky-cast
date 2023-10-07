@@ -39,7 +39,7 @@ export default function WeatherReport() {
     return (
         <article className="">
             <div className="flex justify-center md:justify-start ">
-                <div className={`min-w-[90%] bg-gray-400/20 hover:bg-gray-400/40 dark:bg-black/60 relative hover:dark:bg-black/30 transition-colors px-6 sm:px-10 md:px-6 drop-shadow-2xl shadow-slate-300  filter-none lg:px-10 py-10 rounded-3xl sm:min-w-[60%] md:min-w-[80%] lg:min-w-[70%]`}>
+                <div className={`min-w-[90%] bg-gray-400/20 hover:bg-gray-400/40 dark:bg-black/60 relative hover:dark:bg-black/30 transition-colors px-6 sm:px-10 md:px-6 drop-shadow-2xl shadow-slate-300  filter-none lg:px-10 py-10 rounded-3xl sm:min-w-[60%] md:min-w-[90%] lg:min-w-[70%]`}>
                     <div className="absolute top-2 right-5" onClick={() => handleRefresh(weatherData?.coord)}><IoMdRefresh size={24} /></div>
                     <div className="flex justify-between border-b-[2px] border-gray-400 py-2 px-4">
                         <h4 className=" ">Weather At</h4>

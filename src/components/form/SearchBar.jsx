@@ -48,7 +48,7 @@ const SearchBar = () => {
     async function getCities() {
       try {
         //
-        /** get data from api destructured data and status. 
+        /**get data from api destructured data and status. 
          * 
          * @async
          * @returns - {status, data }
@@ -99,8 +99,8 @@ const SearchBar = () => {
   };
 
 
-  /** set the handle SetData Takes up params
-   * 
+  /**
+   * set the handle SetData Takes up params
    * @param {lat, lon} location 
    * @returns void
    * 
@@ -149,7 +149,8 @@ const SearchBar = () => {
               variants={container}
               initial="hidden"
               animate="show"
-              className="top-10  rounded-lg my-1 dark:bg-black/90 bg-blue-400/20  min-w-[90%] sm:min-w-[60%] md:min-w-[80%] lg:min-w-[70%] py-2  absolute"
+
+              className="top-10  rounded-lg my-1 z-10 bg- dark:bg-black min-w-[90%] sm:min-w-[60%] md:min-w-[80%] lg:min-w-[70%] py-2  absolute"
             >
               {CityDebounced &&
                 receivedCity

@@ -44,7 +44,9 @@ export default function WeatherDataProvider({ children }) {
   );
   const [weatherData, setWeatherData] = useState({});
   function ToggleTemperature() {
-    if (temperature === TEMPERATURE.CELSIUS) {
+    if (temperature === TEMPERATURE.CELSIUS && !weatherData?.main?.temp) return setTemperature(TEMPERATURE.FAHRENHEIT)
+    if (temperature === TEMPERATURE.FAHRENHEIT && !weatherData?.main?.temp) return setTemperature(TEMPERATURE.CELSIUS)
+    if (temperature === TEMPERATURE.CELSIUS && weatherData?.main?.temp) {
       const proccesedData = ProccessWeatherData(
         weatherData,
         temperature,
@@ -62,7 +64,7 @@ export default function WeatherDataProvider({ children }) {
       setTemperature(TEMPERATURE.FAHRENHEIT);
       return;
     }
-    if (temperature === TEMPERATURE.FAHRENHEIT) {
+    if (temperature === TEMPERATURE.FAHRENHEIT && weatherData?.main?.temp) {
       const proccesedData = ProccessWeatherData(
         weatherData,
         temperature,
@@ -79,6 +81,7 @@ export default function WeatherDataProvider({ children }) {
       setTemperature(TEMPERATURE.CELSIUS);
       return;
     }
+
     return toast("Unable to Change Temperature");
   }
 
@@ -104,7 +107,7 @@ export default function WeatherDataProvider({ children }) {
     if (res.status === 200) {
       const proccesedData = ProccessWeatherData(
         data,
-        TEMPERATURE.CELSIUS,
+        temperature,
         TEMPERATURE.KELVIN,
         TEMPERATURE,
         { server: true }

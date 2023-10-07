@@ -14,7 +14,6 @@ export const THEME_COLOR = {
 
 const ToggleThemeButton = () => {
   const { theme, setTheme } = useTheme();
-  const [client, setClient] = useState(false);
 
   //handle Toggle States
   const handleThemeChange = () => {
@@ -24,9 +23,6 @@ const ToggleThemeButton = () => {
   };
 
   //to avoid hydration issue
-  useEffect(() => {
-    setClient(true);
-  }, []);
 
   return (
     <AnimatePresence mode="popLayout">
@@ -39,14 +35,14 @@ const ToggleThemeButton = () => {
         onClick={handleThemeChange}
         className="relative "
       >
-        {client && (
-          <Image
-            width={32}
-            height={32}
-            alt="Change Theme"
-            src={theme === THEME_COLOR.DARK ? DarkMoon : LightMoon}
-          />
-        )}
+
+        <Image
+          width={32}
+          height={32}
+          alt="Change Theme"
+          src={theme === THEME_COLOR.DARK ? DarkMoon : LightMoon}
+        />
+
       </motion.div>
     </AnimatePresence>
   );

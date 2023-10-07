@@ -10,10 +10,10 @@ export default function Home() {
   return (
     <>
       <header className="flex items-center flex-col justify-center  my-10 ">
-        <h1 className="text-5xl lg:text-6xl font-bold whitespace-pre flex flex-col md:flex-row">
+        <h1 className="text-4xl xs:text-5xl lg:text-6xl font-bold whitespace-pre flex flex-col md:flex-row">
           Your Weather <HeroTitle />
         </h1>
-        <p className="max-w-xl text-base lg:text-lg font-light text-center my-2">
+        <p className="max-w-xl text-sm xs:text-base lg:text-lg font-light text-center my-2">
           Get the latest weather information at your fingertips. Stay prepared
           and make informed decisions with real-time updates and accurate
           forecasts.
@@ -28,7 +28,7 @@ export default function Home() {
             <WeatherWidget />
           </Suspense>
         </section>
-        <section>
+        <section className="my-6 md:my-0">
           <WeatherCartContainer />
         </section>
       </main>

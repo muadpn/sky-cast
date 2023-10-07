@@ -16,7 +16,7 @@ const WeatherWidget = () => {
   if (!weatherData?.main?.temp) return <EncorageToSearch />
   return (
     <article className="">
-      <div className="flex items-center justify-center gap-4 ">
+      <div className="flex flex-col xs:flex-row  items-center justify-center gap-4 ">
         <div className="flex">
           <h3 className="text-6xl font-light">{Math.floor(weatherData?.main?.temp)}</h3>
           <sup className="text-2xl my-2">°{temperature?.charAt(0)}</sup>
@@ -32,7 +32,7 @@ const WeatherWidget = () => {
             </p>
           </div>
         </div>
-        <div className="self-start max-h-min justify-start">
+        <div className="sm:self-start max-h-min sm:justify-start">
           <div className="flex flex-col items-center">
             {weatherData && <WeatherIcon code={`A${weatherData?.weather[0]?.icon}`} size={50} />}
             <h1 className="font-medium">{weatherData?.weather[0]?.main}</h1>
