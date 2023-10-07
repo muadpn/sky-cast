@@ -44,8 +44,22 @@ export default function WeatherDataProvider({ children }) {
   );
   const [weatherData, setWeatherData] = useState({});
   function ToggleTemperature() {
-    if (temperature === TEMPERATURE.CELSIUS && !weatherData?.main?.temp) return setTemperature(TEMPERATURE.FAHRENHEIT)
-    if (temperature === TEMPERATURE.FAHRENHEIT && !weatherData?.main?.temp) return setTemperature(TEMPERATURE.CELSIUS)
+    if (temperature === TEMPERATURE.CELSIUS && !weatherData?.main?.temp) {
+      localStorage.setItem(
+        STORAGE_NAME_TEMPERATURE,
+        JSON.stringify(TEMPERATURE.FAHRENHEIT)
+      );
+      setTemperature(TEMPERATURE.FAHRENHEIT)
+      return
+    }
+    if (temperature === TEMPERATURE.FAHRENHEIT && !weatherData?.main?.temp) {
+      localStorage.setItem(
+        STORAGE_NAME_TEMPERATURE,
+        JSON.stringify(TEMPERATURE.CELSIUS)
+      );
+      setTemperature(TEMPERATURE.CELSIUS)
+      return
+    }
     if (temperature === TEMPERATURE.CELSIUS && weatherData?.main?.temp) {
       const proccesedData = ProccessWeatherData(
         weatherData,
